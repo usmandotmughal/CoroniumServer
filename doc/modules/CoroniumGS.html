@@ -1,0 +1,808 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Coronium GS Server</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="http://bootswatch.com/simplex/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/gs/imgs/coroniumgs-logo-16.png">
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;"><a href="../index.html" style="font-weight:normal;">Coronium GS Server</a></div>
+
+<h4>Contents</h4>
+<ul class="list-group">
+<li class="list-group-item"><a href="#Functions">Functions</a></li>
+<li class="list-group-item"><a href="#Game_Events">Game Events </a></li>
+<li class="list-group-item"><a href="#Client_Events">Client Events </a></li>
+</ul>
+
+
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../modules/Client.html">Client</a></li>
+  <li class="list-group-item"><strong>CoroniumGS</strong></li>
+  <li class="list-group-item"><a href="../modules/Game.html">Game</a></li>
+  <li class="list-group-item"><a href="../modules/Tools.html">Tools</a></li>
+</ul>
+<h4>Topics</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../topics/license.md.html">license</a></li>
+  <li class="list-group-item"><a href="../topics/readme.md.html">readme</a></li>
+  <li class="list-group-item"><a href="../topics/development.md.html">development</a></li>
+</ul>
+<h4>Examples</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../examples/main-tpl.lua.html">main-tpl.lua</a></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+<h1>Module <code>CoroniumGS</code></h1>
+<p>Coronium GS Class.</p>
+<p> A real-time multi-player game server build on Luvit.io.</p>
+<!--     <h3>Info:</h3> -->
+    <ul class="list-inline text-muted" style="font-size: .85em;">
+        <li><span class="label label-default">Copyright</span> 2014 develephant</li>
+        <li><span class="label label-default">License</span> 2-clause BSD</li>
+        <li><span class="label label-default">Author</span> Chris Byerley</li>
+    </ul>
+
+
+<h2><a href="#Functions"><span class="text-muted">Functions</span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#GS:broadcast">GS:broadcast (data_tbl[, in_game=false])</a></td>
+	<td class="summary">Broadcast a message to clients/players.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:cancelGame">GS:cancelGame (game_id)</a></td>
+	<td class="summary">Cancel a game that's in an 'open'
+  state and waiting for players.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getClientById">GS:getClientById (client_id)</a></td>
+	<td class="summary">Get <a href="../modules/Client.html#">Client</a> /Player by its identifier</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getClientCount">GS:getClientCount ()</a></td>
+	<td class="summary">Get the current client count connected to the server.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getClients">GS:getClients ([clients_query=nil])</a></td>
+	<td class="summary">Get clients connected to the server.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getGame">GS:getGame (game_id)</a></td>
+	<td class="summary">Get a game instance by its game id.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getGameCount">GS:getGameCount ([game_query=all])</a></td>
+	<td class="summary">Get a game count of all games, or based on a game query.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getGames">GS:getGames ()</a></td>
+	<td class="summary">Get an array of <a href="../modules/Game.html#">Game</a>  instances.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:getPlayerGame">GS:getPlayerGame (client)</a></td>
+	<td class="summary">Get the game instance <a href="../modules/Client.html#">Client</a> /Player belongs to.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GS:new">GS:new (port, connection_key)</a></td>
+	<td class="summary">Create a new Coronium GS instance.</td>
+	</tr>
+</table>
+<h2><a href="#Game_Events"><span class="text-muted">Game Events </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#GameClose">GameClose</a></td>
+	<td class="summary">A <a href="../modules/Game.html#">Game</a>  been closed and will be erased.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GameCreate">GameCreate</a></td>
+	<td class="summary">A <a href="../modules/Game.html#">Game</a>  has been created.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GameJoin">GameJoin</a></td>
+	<td class="summary">A player has joined a <a href="../modules/Game.html#">Game</a> .</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GameLeave">GameLeave</a></td>
+	<td class="summary">A player has left a <a href="../modules/Game.html#">Game</a> .</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GameStart">GameStart</a></td>
+	<td class="summary">A <a href="../modules/Game.html#">Game</a>  has started.</td>
+	</tr>
+</table>
+<h2><a href="#Client_Events"><span class="text-muted">Client Events </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#ClientClose">ClientClose</a></td>
+	<td class="summary"><a href="../modules/Client.html#">Client</a>  has closed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClientConnect">ClientConnect</a></td>
+	<td class="summary">A <a href="../modules/Client.html#">Client</a>  has connected.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClientData">ClientData</a></td>
+	<td class="summary">Incoming <a href="../modules/Client.html#">Client</a>  data.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClientError">ClientError</a></td>
+	<td class="summary"><a href="../modules/Client.html#">Client</a>  has thrown an error.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ClientTimeout">ClientTimeout</a></td>
+	<td class="summary"><a href="../modules/Client.html#">Client</a>  has timed out.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "GS:broadcast"></a>
+    <span class="lead" style="font-weight:bolder;">GS:broadcast (data_tbl[, in_game=false])</span>
+    </dt>
+    <dd>
+    <em>Broadcast a message to clients/players. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data_tbl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The message data table to broadcast.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">in_game</span>
+            <span class="types"><span class="type">boolean</span></span>
+         Send message to everyone,
+ else will just send to clients/players currently not in a game.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">gs:broadcast( { msg = <span class="string">'Server will be closing soon.'</span> } )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:cancelGame"></a>
+    <span class="lead" style="font-weight:bolder;">GS:cancelGame (game_id)</span>
+    </dt>
+    <dd>
+    <em>Cancel a game that's in an 'open'
+  state and waiting for players. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">game_id</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The <a href="../modules/Game.html#">Game</a>  identifier.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "GS:getClientById"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getClientById (client_id)</span>
+    </dt>
+    <dd>
+    <em>Get <a href="../modules/Client.html#">Client</a> /Player by its identifier </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">client_id</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The client indentifier.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Client</span></span>
+        The <a href="../modules/Client.html#">Client</a> /Player belonging to this id.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> client = gs:getPlayerById( <span class="string">'client-id'</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getClientCount"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getClientCount ()</span>
+    </dt>
+    <dd>
+    <em>Get the current client count connected to the server. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The client count.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> client_cnt = gs:getClientCount()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getClients"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getClients ([clients_query=nil])</span>
+    </dt>
+    <dd>
+    <em>Get clients connected to the server. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">clients_query</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         An optional query table.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        A table of clients.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> clients = gs:getClients()
+ <span class="keyword">for</span> _, client <span class="keyword">in</span> <span class="global">pairs</span>( clients ) <span class="keyword">do</span>
+   p( client:getId() )
+ <span class="keyword">end</span>
+ <span class="comment">--== With 'in game' query
+</span> <span class="keyword">local</span> clients = gs:getClients( { in_game = <span class="keyword">true</span>|<span class="keyword">false</span> } )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getGame"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getGame (game_id)</span>
+    </dt>
+    <dd>
+    <em>Get a game instance by its game id. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">game_id</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The game id to pull.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Game</span></span>
+        The requested <a href="../modules/Game.html#">Game</a>  instance.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> game = gm:getGame( <span class="string">'game-id'</span> )
+ <span class="keyword">if</span> game <span class="keyword">then</span>
+  p( game:getId() )
+ <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getGameCount"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getGameCount ([game_query=all])</span>
+    </dt>
+    <dd>
+    <em>Get a game count of all games, or based on a game query. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">game_query</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A query to use as
+ a filter for returned results.  You can query for
+ players max, game state, or both.
+         (<em>default</em> all)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The number of games found.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="comment">--== Count all games
+</span> <span class="keyword">local</span> game_count = gs:getGameCount()
+ <span class="comment">--== Count 'open' games
+</span> <span class="keyword">local</span> game_count = gs:getGameCount( { game_state = <span class="string">'open'</span> } )
+ <span class="comment">--== Count 'full' games
+</span> <span class="keyword">local</span> game_count = gs:getGameCount( { game_state = <span class="string">'full'</span> } )
+ <span class="comment">--== Count 'closed' games, these games will be cleared
+</span> <span class="comment">--== on the next game queue cycle.
+</span> <span class="keyword">local</span> game_count = gs:getGameCount( { game_state = <span class="string">'closed'</span> } )
+ <span class="comment">--== Get game count with players max setting of 2, in any state.
+</span> <span class="keyword">local</span> game_count = gs:getGameCount( { players_max = <span class="number">2</span> } )
+ <span class="comment">--== Get game count with 3 players, in an 'open' state.
+</span> <span class="keyword">local</span> game_count = gs:getGameCount( { players_max = <span class="number">3</span>, game_state = <span class="string">'open'</span> } )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getGames"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getGames ()</span>
+    </dt>
+    <dd>
+    <em>Get an array of <a href="../modules/Game.html#">Game</a>  instances. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        A table of games, keyed by ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> games = gs:getGames()
+ <span class="keyword">for</span> id, game <span class="keyword">in</span> <span class="global">pairs</span>( games ) <span class="keyword">do</span>
+  p( <span class="string">'game id is: '</span> .. id )
+ <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:getPlayerGame"></a>
+    <span class="lead" style="font-weight:bolder;">GS:getPlayerGame (client)</span>
+    </dt>
+    <dd>
+    <em>Get the game instance <a href="../modules/Client.html#">Client</a> /Player belongs to. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">client</span>
+            <span class="types"><span class="type">Client</span></span>
+         The Client/Player to pull game for.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Game</span></span>
+        The requested <a href="../modules/Game.html#">Game</a>  instance.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> game = gm:getPlayerGame( client )
+ <span class="keyword">if</span> game <span class="keyword">then</span>
+  p( game:getId() )
+ <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GS:new"></a>
+    <span class="lead" style="font-weight:bolder;">GS:new (port, connection_key)</span>
+    </dt>
+    <dd>
+    <em>Create a new Coronium GS instance. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">port</span>
+            <span class="types"><span class="type">int</span></span>
+         Port to listen on.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">connection_key</span>
+            <span class="types"><span class="type">sting</span></span>
+         A security key to pair client/server
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        CoroniumGS The game server instance.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> gs = <span class="global">require</span>( <span class="string">'CoroniumGS'</span> ):new( <span class="number">1234</span>, <span class="string">'secret_key'</span> )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Game_Events"></a>Game Events </h2>
+
+ You can listen for the following <a href="../modules/Game.html#">Game</a>  events.
+    <dl class="function">
+    <dt>
+    <a name = "GameClose"></a>
+    <span class="lead" style="font-weight:bolder;">GameClose</span>
+    </dt>
+    <dd>
+    <em>A <a href="../modules/Game.html#">Game</a>  been closed and will be erased. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">GameClose</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"GameClose"</span>, <span class="keyword">function</span>( game_id )
+	<span class="global">print</span>( game_id )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GameCreate"></a>
+    <span class="lead" style="font-weight:bolder;">GameCreate</span>
+    </dt>
+    <dd>
+    <em>A <a href="../modules/Game.html#">Game</a>  has been created. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">GameCreate</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"GameCreate"</span>, <span class="keyword">function</span>( game )
+	<span class="global">print</span>( game:getId() )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GameJoin"></a>
+    <span class="lead" style="font-weight:bolder;">GameJoin</span>
+    </dt>
+    <dd>
+    <em>A player has joined a <a href="../modules/Game.html#">Game</a> . </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">GameJoin</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"GameJoin"</span>, <span class="keyword">function</span>( game, player )
+	<span class="global">print</span>( game:getId(), player:getId() )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GameLeave"></a>
+    <span class="lead" style="font-weight:bolder;">GameLeave</span>
+    </dt>
+    <dd>
+    <em>A player has left a <a href="../modules/Game.html#">Game</a> . </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">GameLeave</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"GameLeave"</span>, <span class="keyword">function</span>( game, player )
+	<span class="global">print</span>( game:getId(), player:getId() )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "GameStart"></a>
+    <span class="lead" style="font-weight:bolder;">GameStart</span>
+    </dt>
+    <dd>
+    <em>A <a href="../modules/Game.html#">Game</a>  has started.  All players present.</em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">GameStart</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"GameStart"</span>, <span class="keyword">function</span>( game, players )
+	<span class="global">print</span>( game:getId(), #players )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Client_Events"></a>Client Events </h2>
+
+ You can listen for the following <a href="../modules/Client.html#">Client</a>  events.
+    <dl class="function">
+    <dt>
+    <a name = "ClientClose"></a>
+    <span class="lead" style="font-weight:bolder;">ClientClose</span>
+    </dt>
+    <dd>
+    <em><a href="../modules/Client.html#">Client</a>  has closed. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">ClientClose</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"ClientClose"</span>, <span class="keyword">function</span>( client )
+	<span class="global">print</span>( <span class="string">"client closed"</span> )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ClientConnect"></a>
+    <span class="lead" style="font-weight:bolder;">ClientConnect</span>
+    </dt>
+    <dd>
+    <em>A <a href="../modules/Client.html#">Client</a>  has connected. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">ClientConnect</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"ClientConnect"</span>, <span class="keyword">function</span>( client )
+	<span class="global">print</span>( client:getHost() )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ClientData"></a>
+    <span class="lead" style="font-weight:bolder;">ClientData</span>
+    </dt>
+    <dd>
+    <em>Incoming <a href="../modules/Client.html#">Client</a>  data. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">ClientData</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"ClientData"</span>, <span class="keyword">function</span>( client, data )
+	<span class="global">print</span>( data.some_table_key )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ClientError"></a>
+    <span class="lead" style="font-weight:bolder;">ClientError</span>
+    </dt>
+    <dd>
+    <em><a href="../modules/Client.html#">Client</a>  has thrown an error. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">ClientError</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"ClientError"</span>, <span class="keyword">function</span>( client, error )
+	<span class="global">print</span>( <span class="string">"error: "</span> .. error )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ClientTimeout"></a>
+    <span class="lead" style="font-weight:bolder;">ClientTimeout</span>
+    </dt>
+    <dd>
+    <em><a href="../modules/Client.html#">Client</a>  has timed out. </em>
+
+
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">ClientTimeout</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+gs:on( <span class="string">"ClientTimeout"</span>, <span class="keyword">function</span>( client )
+	<span class="global">print</span>( <span class="string">"client timed out"</span> )
+<span class="keyword">end</span> )</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>
