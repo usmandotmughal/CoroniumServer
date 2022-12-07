@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Coronium GS Server</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="http://bootswatch.com/simplex/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/gs/imgs/coroniumgs-logo-16.png">
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;"><a href="../index.html" style="font-weight:normal;">Coronium GS Server</a></div>
+
+<h4>Contents</h4>
+<ul class="list-group">
+<li class="list-group-item"><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><strong>Client</strong></li>
+  <li class="list-group-item"><a href="../modules/CoroniumGS.html">CoroniumGS</a></li>
+  <li class="list-group-item"><a href="../modules/Game.html">Game</a></li>
+  <li class="list-group-item"><a href="../modules/Tools.html">Tools</a></li>
+</ul>
+<h4>Topics</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../topics/license.md.html">license</a></li>
+  <li class="list-group-item"><a href="../topics/readme.md.html">readme</a></li>
+  <li class="list-group-item"><a href="../topics/development.md.html">development</a></li>
+</ul>
+<h4>Examples</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../examples/main-tpl.lua.html">main-tpl.lua</a></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+<h1>Module <code>Client</code></h1>
+<p>Coronium GS Client/Player.</p>
+<p> A socket client connected to the server.</p>
+<!--     <h3>Info:</h3> -->
+    <ul class="list-inline text-muted" style="font-size: .85em;">
+        <li><span class="label label-default">Copyright</span> 2014 develephant</li>
+        <li><span class="label label-default">License</span> 2-clause BSD</li>
+        <li><span class="label label-default">Author</span> Chris Byerley</li>
+    </ul>
+
+
+<h2><a href="#Functions"><span class="text-muted">Functions</span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#getGameId">getGameId ()</a></td>
+	<td class="summary">Get the players game identifier.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getHost">getHost ()</a></td>
+	<td class="summary">Get the client host address.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getId">getId ()</a></td>
+	<td class="summary">Get the <a href="../modules/Client.html#">Client</a> /Player identifier.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerData">getPlayerData ()</a></td>
+	<td class="summary">Get the players custom data table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerHandle">getPlayerHandle ()</a></td>
+	<td class="summary">Gets the players connection handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerNum">getPlayerNum ()</a></td>
+	<td class="summary">Get the players game position number.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPort">getPort ()</a></td>
+	<td class="summary">Get the client port.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isInGame">isInGame ()</a></td>
+	<td class="summary">Checks to see if the <a href="../modules/Client.html#">Client</a> /Player is in a <a href="../modules/Game.html#">Game</a> </td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#send">send (data_tbl)</a></td>
+	<td class="summary">Send data to the Client.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setPlayerData">setPlayerData (data)</a></td>
+	<td class="summary">Set the players custom data table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setTimeout">setTimeout (seconds)</a></td>
+	<td class="summary">Set the Client timeout.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "getGameId"></a>
+    <span class="lead" style="font-weight:bolder;">getGameId ()</span>
+    </dt>
+    <dd>
+    <em>Get the players game identifier. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The game id the player belongs to.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> game_id = client:getGameId()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getHost"></a>
+    <span class="lead" style="font-weight:bolder;">getHost ()</span>
+    </dt>
+    <dd>
+    <em>Get the client host address. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        Host address.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> host_addr = client:getHost()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getId"></a>
+    <span class="lead" style="font-weight:bolder;">getId ()</span>
+    </dt>
+    <dd>
+    <em>Get the <a href="../modules/Client.html#">Client</a> /Player identifier. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        player_id.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getPlayerData"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerData ()</span>
+    </dt>
+    <dd>
+    <em>Get the players custom data table.
+ Custom data can be included at connection time
+ or during runtime by using <a href="../modules/Client.html#setPlayerData">setPlayerData</a> .</em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        The custom <a href="../modules/Client.html#">Client</a> /Player data.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "getPlayerHandle"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerHandle ()</span>
+    </dt>
+    <dd>
+    <em>Gets the players connection handle.
+ This can represent a name, or any other identifier.</em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The <a href="../modules/Client.html#">Client</a> /Players name.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> player_handle = client:getPlayerHandle()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayerNum"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerNum ()</span>
+    </dt>
+    <dd>
+    <em>Get the players game position number. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        <a href="../modules/Client.html#">Client</a> /Player position.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> player_num = client:getPlayerNum()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPort"></a>
+    <span class="lead" style="font-weight:bolder;">getPort ()</span>
+    </dt>
+    <dd>
+    <em>Get the client port. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        Port number.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> port_num = client:getPort()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "isInGame"></a>
+    <span class="lead" style="font-weight:bolder;">isInGame ()</span>
+    </dt>
+    <dd>
+    <em>Checks to see if the <a href="../modules/Client.html#">Client</a> /Player is in a <a href="../modules/Game.html#">Game</a>  </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">boolean</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> in_game = client:isInGame()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "send"></a>
+    <span class="lead" style="font-weight:bolder;">send (data_tbl)</span>
+    </dt>
+    <dd>
+    <em>Send data to the Client. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data_tbl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A table of data to send.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">client:send( { points = <span class="number">12</span>, update = <span class="number">1</span> } )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setPlayerData"></a>
+    <span class="lead" style="font-weight:bolder;">setPlayerData (data)</span>
+    </dt>
+    <dd>
+    <em>Set the players custom data table. </p>
+
+<p> You should be sure to get the current data table
+ using <a href="../modules/Client.html#getPlayerData">getPlayerData</a>  and make your changes
+ on that table before using this method.</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The player data table to save/update.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="comment">--== Get the current player data
+</span> <span class="keyword">local</span> pd = client:getPlayerData()
+ <span class="comment">--== Do work
+</span> pb.fav_color = <span class="string">"Red"</span>
+ <span class="comment">--== Store it
+</span> client:setPlayerData( pb )
+ <span class="comment">--== Clear player data
+</span> client:setPlayerData( {} )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setTimeout"></a>
+    <span class="lead" style="font-weight:bolder;">setTimeout (seconds)</span>
+    </dt>
+    <dd>
+    <em>Set the Client timeout. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">seconds</span>
+            <span class="types"><span class="type">int</span></span>
+         The seconds before timeout occurs.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">client:setTimeout( <span class="number">300</span> )</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>

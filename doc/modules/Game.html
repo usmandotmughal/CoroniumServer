@@ -1,0 +1,606 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Coronium GS Server</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="http://bootswatch.com/simplex/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/gs/imgs/coroniumgs-logo-16.png">
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;"><a href="../index.html" style="font-weight:normal;">Coronium GS Server</a></div>
+
+<h4>Contents</h4>
+<ul class="list-group">
+<li class="list-group-item"><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../modules/Client.html">Client</a></li>
+  <li class="list-group-item"><a href="../modules/CoroniumGS.html">CoroniumGS</a></li>
+  <li class="list-group-item"><strong>Game</strong></li>
+  <li class="list-group-item"><a href="../modules/Tools.html">Tools</a></li>
+</ul>
+<h4>Topics</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../topics/license.md.html">license</a></li>
+  <li class="list-group-item"><a href="../topics/readme.md.html">readme</a></li>
+  <li class="list-group-item"><a href="../topics/development.md.html">development</a></li>
+</ul>
+<h4>Examples</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../examples/main-tpl.lua.html">main-tpl.lua</a></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+<h1>Module <code>Game</code></h1>
+<p>Coronium Game Class.</p>
+<p> A single instance of a running game.  You can get a game instance by
+ using the <a href="../modules/CoroniumGS.html#">CoroniumGS</a>  class.</p>
+<!--     <h3>Info:</h3> -->
+    <ul class="list-inline text-muted" style="font-size: .85em;">
+        <li><span class="label label-default">Copyright</span> 2014 develephant</li>
+        <li><span class="label label-default">License</span> 2-clause BSD</li>
+        <li><span class="label label-default">Author</span> Chris Byerley</li>
+    </ul>
+
+
+<h2><a href="#Functions"><span class="text-muted">Functions</span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#broadcast">broadcast (data_tbl)</a></td>
+	<td class="summary">Broadcast a table of data to all players in the game.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#close">close ()</a></td>
+	<td class="summary">Close a game, setting its state to 'closed'.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getData">getData ([data_key=nil])</a></td>
+	<td class="summary">Get the stored game data object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getId">getId ()</a></td>
+	<td class="summary">Get the unique Game identifier</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerByHandle">getPlayerByHandle (player_handle)</a></td>
+	<td class="summary">Get a Client/Player by connection <code>handle</code></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerByNumber">getPlayerByNumber (player_num)</a></td>
+	<td class="summary">Get a Client/Player instance by player number.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayerCount">getPlayerCount ()</a></td>
+	<td class="summary">Get the current player count in the Game.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayers">getPlayers ([exclude_player=nil])</a></td>
+	<td class="summary">Get the game players.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayersInfo">getPlayersInfo ()</a></td>
+	<td class="summary">Build a players meta data table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getPlayersMax">getPlayersMax ()</a></td>
+	<td class="summary">Get the maximum amount of players this game
+ has been set to handle.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getRandomPlayer">getRandomPlayer ([exclude_player=nil])</a></td>
+	<td class="summary">Get a random Client/Player from the game.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getState">getState ()</a></td>
+	<td class="summary">Get the current game state.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#publishGameData">publishGameData ([player])</a></td>
+	<td class="summary">Publish the currently stored game data to the game player(s).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#publishGameDone">publishGameDone ([final_msg=nil])</a></td>
+	<td class="summary">Broadcast a <code>GameDone</code> message to all game players.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#publishPlayersInfo">publishPlayersInfo ()</a></td>
+	<td class="summary">Broadcast the game players meta information to all game players.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#setData">setData (data_tbl)</a></td>
+	<td class="summary">Set the game data with a table</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "broadcast"></a>
+    <span class="lead" style="font-weight:bolder;">broadcast (data_tbl)</span>
+    </dt>
+    <dd>
+    <em>Broadcast a table of data to all players in the game. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data_tbl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A table of data to broadcast.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:broadcast( { update = <span class="number">1</span> } )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "close"></a>
+    <span class="lead" style="font-weight:bolder;">close ()</span>
+    </dt>
+    <dd>
+    <em>Close a game, setting its state to 'closed'.
+ The game will be deleted on the next queue cycle.</em>
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:close()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getData"></a>
+    <span class="lead" style="font-weight:bolder;">getData ([data_key=nil])</span>
+    </dt>
+    <dd>
+    <em>Get the stored game data object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data_key</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A specifc key to pull.
+ If you omit this parameter, the entire game data object
+ is returned.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        The game data table.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> game_data = game:getData()
+ <span class="keyword">local</span> score = game_data.score
+ <span class="comment">--== is the same as
+</span> <span class="keyword">local</span> score = game:getData( <span class="string">'score'</span> )
+ <span class="comment">--== and
+</span> <span class="keyword">local</span> score = game.data.score</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getId"></a>
+    <span class="lead" style="font-weight:bolder;">getId ()</span>
+    </dt>
+    <dd>
+    <em>Get the unique Game identifier </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The game id.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> game_id = game:getId()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayerByHandle"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerByHandle (player_handle)</span>
+    </dt>
+    <dd>
+    <em>Get a Client/Player by connection <code>handle</code> </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">player_handle</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The handle passed into the <a href="http://coronium.gs/client/modules/CoroniumGSClient.html#connection_table">connection table</a>.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">client</span></span>
+        A <a href="../modules/Client.html#">Client</a> /Player instance.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> player = game:getPlayerByHandle( <span class="string">'handle-id'</span> )
+ <span class="keyword">if</span> player <span class="keyword">then</span>
+  p( <span class="string">'got player'</span> )
+ <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayerByNumber"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerByNumber (player_num)</span>
+    </dt>
+    <dd>
+    <em>Get a Client/Player instance by player number. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">player_num</span>
+            <span class="types"><span class="type">int</span></span>
+         The player number to retrieve.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">client</span></span>
+        A <a href="../modules/Client.html#">Client</a> /Player instance.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> player = game:getPlayerByNumber( <span class="number">2</span> )
+ <span class="keyword">if</span> player <span class="keyword">then</span>
+  p( <span class="string">'got player'</span> )
+ <span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayerCount"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayerCount ()</span>
+    </dt>
+    <dd>
+    <em>Get the current player count in the Game. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        Player count.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> player_cnt = game:getPlayerCount()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayers"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayers ([exclude_player=nil])</span>
+    </dt>
+    <dd>
+    <em>Get the game players. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">exclude_player</span>
+            <span class="types"><span class="type">Client</span></span>
+         A <a href="../modules/Client.html#">Client</a> /Player to exclude from the list.
+ Useful to get all the players except the calling player.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">array</span></span>
+        A table array of <a href="../modules/Client.html#">Client</a> /Player instances.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> players = game:getPlayers()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayersInfo"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayersInfo ()</span>
+    </dt>
+    <dd>
+    <em>Build a players meta data table.  Refreshes cache.</em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        The players meta information.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> players_meta = game:getPlayersInfo()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPlayersMax"></a>
+    <span class="lead" style="font-weight:bolder;">getPlayersMax ()</span>
+    </dt>
+    <dd>
+    <em>Get the maximum amount of players this game
+ has been set to handle. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        maximal players.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> max_players = game:getPlayersMax()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getRandomPlayer"></a>
+    <span class="lead" style="font-weight:bolder;">getRandomPlayer ([exclude_player=nil])</span>
+    </dt>
+    <dd>
+    <em>Get a random Client/Player from the game. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">exclude_player</span>
+            <span class="types"><span class="type">Client</span></span>
+         A <a href="../modules/Client.html#">Client</a> /Player to exclude from the list.
+ Useful to get all the players except the calling player.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Client</span></span>
+        A random <a href="../modules/Client.html#">Client</a> /Player instance.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> ran_player = game:getRandomPlayer()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getState"></a>
+    <span class="lead" style="font-weight:bolder;">getState ()</span>
+    </dt>
+    <dd>
+    <em>Get the current game state.
+ One of <code>open</code>, <code>closed</code>, or <code>full</code></em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The current state.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> game_state = game:getState()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "publishGameData"></a>
+    <span class="lead" style="font-weight:bolder;">publishGameData ([player])</span>
+    </dt>
+    <dd>
+    <em>Publish the currently stored game data to the game player(s). </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">player</span>
+            <span class="types"><span class="type">client</span></span>
+         The <a href="../modules/Client.html#">Client</a> /Player to publish data to.
+ If no player is passed, will be published to all players. <em>Optional</em>.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:publishGameData()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "publishGameDone"></a>
+    <span class="lead" style="font-weight:bolder;">publishGameDone ([final_msg=nil])</span>
+    </dt>
+    <dd>
+    <em>Broadcast a <code>GameDone</code> message to all game players.
+ This does not close the game (see: <a href="../modules/Game.html#close">close</a> ), but instead is a helper
+ method to send a 'game done' event to the players.</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">final_msg</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         A message to send along with the <code>GameDone</code>
+ event.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:publishGameDone()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "publishPlayersInfo"></a>
+    <span class="lead" style="font-weight:bolder;">publishPlayersInfo ()</span>
+    </dt>
+    <dd>
+    <em>Broadcast the game players meta information to all game players. </em>
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:publishPlayersInfo()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "setData"></a>
+    <span class="lead" style="font-weight:bolder;">setData (data_tbl)</span>
+    </dt>
+    <dd>
+    <em>Set the game data with a table </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">data_tbl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The table to use for
+ the game data.  <strong>Overwrites existing game data.</strong>
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">game:setData( { enemies = <span class="number">35</span>, mana = <span class="number">2</span> } )</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>

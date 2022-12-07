@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Coronium GS Server</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="http://bootswatch.com/simplex/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/gs/imgs/coroniumgs-logo-16.png">
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;"><a href="../index.html" style="font-weight:normal;">Coronium GS Server</a></div>
+
+<h4>Contents</h4>
+<ul class="list-group">
+<li class="list-group-item"><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../modules/Client.html">Client</a></li>
+  <li class="list-group-item"><a href="../modules/CoroniumGS.html">CoroniumGS</a></li>
+  <li class="list-group-item"><a href="../modules/Game.html">Game</a></li>
+  <li class="list-group-item"><strong>Tools</strong></li>
+</ul>
+<h4>Topics</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../topics/license.md.html">license</a></li>
+  <li class="list-group-item"><a href="../topics/readme.md.html">readme</a></li>
+  <li class="list-group-item"><a href="../topics/development.md.html">development</a></li>
+</ul>
+<h4>Examples</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../examples/main-tpl.lua.html">main-tpl.lua</a></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+<h1>Module <code>Tools</code></h1>
+<p>Tools module.</p>
+<p> A collection of utilities.</p>
+<!--     <h3>Info:</h3> -->
+    <ul class="list-inline text-muted" style="font-size: .85em;">
+        <li><span class="label label-default">Copyright</span> 2014 develephant</li>
+        <li><span class="label label-default">License</span> 2-clause BSD</li>
+        <li><span class="label label-default">Author</span> Chris Byerley</li>
+    </ul>
+
+
+<h2><a href="#Functions"><span class="text-muted">Functions</span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered">
+	<tr>
+	<td class="name" nowrap><a href="#md5">md5 (input_string)</a></td>
+	<td class="summary">Create an MD5 hash.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#now">now ()</a></td>
+	<td class="summary">Get the current time as UNIX timestamp</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#uuid">uuid ([index_num])</a></td>
+	<td class="summary">Generate a unique id.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "md5"></a>
+    <span class="lead" style="font-weight:bolder;">md5 (input_string)</span>
+    </dt>
+    <dd>
+    <em>Create an MD5 hash. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">input_string</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The string to hash.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The newly created MD5 hash.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "now"></a>
+    <span class="lead" style="font-weight:bolder;">now ()</span>
+    </dt>
+    <dd>
+    <em>Get the current time as UNIX timestamp </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        UNIX timestamp.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> now = tools.now()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "uuid"></a>
+    <span class="lead" style="font-weight:bolder;">uuid ([index_num])</span>
+    </dt>
+    <dd>
+    <em>Generate a unique id. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">index_num</span>
+            <span class="types"><span class="type">int</span></span>
+         A unique index number. <em>Optional</em>.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        A unique id.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> uuid = tools.uuid()</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>

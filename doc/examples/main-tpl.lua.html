@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Coronium GS Server</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="http://bootswatch.com/simplex/bootstrap.min.css" type="text/css" />
+    <link rel="shortcut icon" href="/gs/imgs/coroniumgs-logo-16.png">
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;"><a href="../index.html" style="font-weight:normal;">Coronium GS Server</a></div>
+
+
+
+<h4>Examples</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><strong>main-tpl.lua</strong></li>
+</ul>
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../modules/Client.html">Client</a></li>
+  <li class="list-group-item"><a href="../modules/CoroniumGS.html">CoroniumGS</a></li>
+  <li class="list-group-item"><a href="../modules/Game.html">Game</a></li>
+  <li class="list-group-item"><a href="../modules/Tools.html">Tools</a></li>
+</ul>
+<h4>Topics</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><a href="../topics/development.md.html">development</a></li>
+  <li class="list-group-item"><a href="../topics/license.md.html">license</a></li>
+  <li class="list-group-item"><a href="../topics/readme.md.html">readme</a></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+    <pre>
+<span class="comment">--======================================================================--
+</span><span class="comment">--== Coronium GS
+</span><span class="comment">--======================================================================--
+</span><span class="keyword">local</span> gs = <span class="global">require</span>( <span class="string">'CoroniumGS'</span> ):new( <span class="number">7173</span>, <span class="string">'abc'</span> )
+<span class="comment">--======================================================================--
+</span><span class="comment">--== Game Code
+</span><span class="comment">--======================================================================--
+</span>
+<span class="comment">--== Game Code Goes Here
+</span>
+<span class="comment">--======================================================================--
+</span><span class="comment">--== Game Events
+</span><span class="comment">--======================================================================--
+</span><span class="keyword">local</span> <span class="keyword">function</span> onGameCreate( game )
+	p( <span class="string">"--== Game Created ==--"</span> )
+	p( game:getId() )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onGameJoin( game, player )
+	p( <span class="string">"--== Game Joined ==--"</span> )
+	p( game:getId(), player:getId() )
+
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onGameStart( game, players )
+	p( <span class="string">"--== New Game Started "</span> .. game:getId() .. <span class="string">" ==--"</span> )
+	p( <span class="string">"Games"</span>, gs:getGameCount() )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onGameLeave( game, player )
+	p( <span class="string">"--== Game Leave ==--"</span> )
+	p( game:getId(), player:getId() )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onGameClose( game_id )
+	p( <span class="string">"--== Game Closed ==--"</span> )
+	p( game_id )
+<span class="keyword">end</span>
+<span class="comment">--======================================================================--
+</span><span class="comment">--== Client Events
+</span><span class="comment">--======================================================================--
+</span><span class="keyword">local</span> <span class="keyword">function</span> onClientData( client, data )
+	p( data )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onClientConnect( client )
+	p( <span class="string">'--== Client Connected ==--'</span> )
+	p( client:getHost() )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onClientClose( client )
+	p( <span class="string">'--== Client Closed ==--'</span> )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onClientTimeout( client )
+	p( <span class="string">'--== Client Timeout ==--'</span> )
+	p( client:getHost()  )
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> onClientError( client, error )
+	p( <span class="string">'--== Client Error ==--'</span> )
+	p( error )
+<span class="keyword">end</span>
+<span class="comment">--======================================================================--
+</span><span class="comment">--== GameManager Handlers
+</span><span class="comment">--======================================================================--
+</span>gs:on( <span class="string">"GameStart"</span>, onGameStart )
+gs:on( <span class="string">"GameCreate"</span>, onGameCreate )
+gs:on( <span class="string">"GameJoin"</span>, onGameJoin )
+gs:on( <span class="string">"GameLeave"</span>, onGameLeave )
+gs:on( <span class="string">"GameClose"</span>, onGameClose )
+<span class="comment">--======================================================================--
+</span><span class="comment">--== Client Handlers
+</span><span class="comment">--======================================================================--
+</span>gs:on( <span class="string">"ClientConnect"</span>, onClientConnect )
+gs:on( <span class="string">"ClientData"</span>, onClientData )
+gs:on( <span class="string">"ClientError"</span>, onClientError )
+gs:on( <span class="string">"ClientClose"</span>, onClientClose )
+gs:on( <span class="string">"ClientTimeout"</span>, onClientTimeout )</pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>
